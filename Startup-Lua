@@ -23,19 +23,28 @@ function sceneMasterButtonPress()
 		elseif (buttonNumber == "4") then
 			dimmingToggle(59) -- balcony
 		elseif (buttonNumber == "5") then
+			lightToggle(17) -- bedroom
 		elseif (buttonNumber == "6") then
+			lightToggle(48) -- entrance
 		elseif (buttonNumber == "7") then
+			lightToggle(32) -- stairs
 		elseif (buttonNumber == "8") then
+			lightToggle(53) -- monitors
 		end	
 	elseif (buttonMode == "1") then -- long press
 		if (buttonNumber == "1") then
+			runScene("14") -- all off
 		elseif (buttonNumber == "2") then
+			
 		elseif (buttonNumber == "3") then
 		elseif (buttonNumber == "4") then
 		elseif (buttonNumber == "5") then
+			runScene("11") -- to bed
 		elseif (buttonNumber == "6") then
+			-- downstairs off
 		elseif (buttonNumber == "7") then
 		elseif (buttonNumber == "8") then
+			setLightOff(53) -- monitors off
 		end	
 	elseif (buttonMode == "3") then -- double press
 		if (buttonNumber == "1") then
@@ -72,7 +81,7 @@ function fobButtonPress()
 	end	
 end
 
--- Special funtion to toggle my kitchen lights based on the state of one of the lights
+-- Special function to toggle my kitchen lights based on the state of one of the lights
 function kitchenToggle()
 	if (getLightPower(50) == "0") then
 		runScene("3")
