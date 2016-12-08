@@ -5,10 +5,10 @@ luup.variable_watch("sceneMasterButtonPress","urn:micasaverde-com:serviceId:Scen
 luup.variable_watch("fobButtonPress","urn:micasaverde-com:serviceId:SceneController1","LastSceneID",63)
 
 function sceneMasterButtonPress()
-  -- button is in the sl_CentralScene variable
-  local buttonNumber = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "sl_CentralScene", 62)
+	-- button is in the sl_CentralScene variable
+	local buttonNumber = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "sl_CentralScene", 62)
   
-  -- how it was pressed is in the sl_CentralSceneAttr variable
+	-- how it was pressed is in the sl_CentralSceneAttr variable
 	local buttonMode = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "sl_CentralSceneAttr", 62) -- 3 = double press, 1 = long press, 0 = short press
 	
 	luup.log('SceneMaster Button ' .. buttonNumber .. ' / ' .. buttonMode)
@@ -51,12 +51,12 @@ function sceneMasterButtonPress()
 end
 
 function fobButtonPress()
-  --  for the Central Scene mode the button is in the LastSceneID
-  local buttonNumber = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "LastSceneID", 63)
+	--  for the Central Scene mode the button is in the LastSceneID
+	local buttonNumber = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "LastSceneID", 63)
 	
 	luup.log('Fob Button ' .. buttonNumber)
 	
-  -- Every second number is a long press
+	-- Every second number is a long press
 	if (buttonNumber == "1") then -- Button 1
 		setLightOn(17) -- bedroom
 	elseif (buttonNumber == "2") then -- Long Button 1
