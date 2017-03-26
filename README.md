@@ -13,7 +13,7 @@ Log File Analysis
 ==================
 http://wiki.micasaverde.com/index.php/Logs 
 
-Login via PuTTY (linux)
+Login via PuTTY (linux) - note: right click seems to be paste
 Enter IP of Vera
 root
 your veras wifi password
@@ -27,3 +27,5 @@ Expect logs not to be instant
 
 Can filter logs with grep ocmmands...
 tail -f LuaUPnP.log | grep "^04\|^08"
+
+tail -f LuaUPnP.log | grep "sl_CentralScene"
