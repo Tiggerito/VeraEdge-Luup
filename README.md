@@ -28,4 +28,8 @@ Expect logs not to be instant
 Can filter logs with grep ocmmands...
 tail -f LuaUPnP.log | grep "^04\|^08"
 
-tail -f LuaUPnP.log | grep "sl_CentralScene"
+tail -f LuaUPnP.log | grep "Device_Variable\|Tonys"
+
+This filters out a lot of the noise:
+
+tail -f LuaUPnP.log | grep -v "AlarmManager\|ZWaveNode\|ZWJob\|GlobalLog\|JobHandler\|ZWaveSerial\|ACK:\|Device_Basic::\|mg\_callback\|ZWaveCommand::\|^41\|^42\|Job::\|ThreadedClass::\|luvd\_get\|GetFramePending::\|EnergyMetering1\|NO ROUTE\|PollRatings\|UPnPCallbackEventHandler\|LuaUPnPAlive\|CHECK\_TIME\|luvd\_open\|ConsecutivePollFails\|LastPollSuccess\|Battery\|iDataVersion\|ExportData\|ZWaveMultiEmbedded\|UpdateStateList\|UpdatePollList"
