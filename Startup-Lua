@@ -4,6 +4,9 @@ luup.variable_watch("sceneMasterButtonPress","urn:micasaverde-com:serviceId:Scen
 -- Watch my Vision ZT 1101BR-5 Keyfob
 luup.variable_watch("fobButtonPress","urn:micasaverde-com:serviceId:SceneController1","LastSceneID",72)
 
+-- Watch my Fibaro The Button
+luup.variable_watch("theButtonPress","urn:micasaverde-com:serviceId:SceneController1","sl_CentralScene",73)
+
 function sceneMasterButtonPress()
 	-- button is in the sl_CentralScene variable
 	local originalButtonNumber = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "sl_CentralScene", 62)
@@ -99,6 +102,24 @@ function fobButtonPress()
 	elseif (buttonNumber == "7") then -- Button 4
 		runScene("14") -- all lights off
 	elseif (buttonNumber == "8") then -- Long Button 4
+	end	
+end
+
+function theButtonPress()
+	local buttonNumber = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "sl_CentralSceneAttr", 73)
+	
+	luup.log('Tonys Log: The Button ' .. buttonNumber)
+	
+	if (buttonNumber == "128") then -- Button x1
+		kitchenToggle() -- kitchen
+	elseif (buttonNumber == "129") then -- Button Release after Hold
+	elseif (buttonNumber == "130") then -- Button Hold
+	elseif (buttonNumber == "131") then -- Button x2
+		runScene("11") -- bed time
+	elseif (buttonNumber == "132") then -- Button x3
+	elseif (buttonNumber == "133") then -- Button x4
+	elseif (buttonNumber == "134") then -- Button x5
+	elseif (buttonNumber == "135") then -- Button x6 ???
 	end	
 end
 

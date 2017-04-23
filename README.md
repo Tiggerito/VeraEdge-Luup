@@ -33,3 +33,17 @@ tail -f LuaUPnP.log | grep "Device_Variable\|Tonys"
 This filters out a lot of the noise:
 
 tail -f LuaUPnP.log | grep -v "AlarmManager\|ZWaveNode\|ZWJob\|GlobalLog\|JobHandler\|ZWaveSerial\|ACK:\|Device_Basic::\|mg\_callback\|ZWaveCommand::\|^41\|^42\|Job::\|ThreadedClass::\|luvd\_get\|GetFramePending::\|EnergyMetering1\|NO ROUTE\|PollRatings\|UPnPCallbackEventHandler\|LuaUPnPAlive\|CHECK\_TIME\|luvd\_open\|ConsecutivePollFails\|LastPollSuccess\|Battery\|iDataVersion\|ExportData\|ZWaveMultiEmbedded\|UpdateStateList\|UpdatePollList"
+
+Fibaro Button
+
+http://forum.micasaverde.com/index.php/topic,39119.60.html
+
+Original Values
+urn:schemas-micasaverde-com:device:GenericIO:1
+D_GenericIO1.xml
+D_GenericIO1.json
+
+New Values
+device_type: urn:schemas-upnp-org:device:SceneController:1
+device_file: D_SceneController1.xml
+device_json: D_FibaroButton1.json
