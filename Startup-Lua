@@ -1,3 +1,6 @@
+-- For Vera Concierge
+require("ConciergeServer")
+
 -- Watch my ZRC-90 Scene Master 
 luup.variable_watch("sceneMasterButtonPress","urn:micasaverde-com:serviceId:SceneController1","sl_CentralScene",62)
 
