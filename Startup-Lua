@@ -1,3 +1,5 @@
+-- Vera->Apps->Develop apps->Edit Startup Lua
+
 -- For Vera Concierge
 require("ConciergeServer")
 
@@ -9,6 +11,38 @@ luup.variable_watch("fobButtonPress","urn:micasaverde-com:serviceId:SceneControl
 
 -- Watch my Fibaro The Button
 luup.variable_watch("theButtonPress","urn:micasaverde-com:serviceId:SceneController1","sl_CentralScene",73)
+
+-- Watch switches
+luup.variable_watch("diningSwitch","urn:upnp-org:serviceId:SwitchPower1","Status",22)
+luup.variable_watch("officeSwitch","urn:upnp-org:serviceId:SwitchPower1","Status",19)
+luup.variable_watch("balconySwitch","urn:upnp-org:serviceId:SwitchPower1","Status",59)
+
+function diningSwitch() 
+ 	local status = luup.variable_get("urn:upnp-org:serviceId:SwitchPower1", "Status", 22) -- 1 = on, 0 = off
+ 	luup.log('Tonys Log: diningSwitch: ' .. status)
+	
+	if (status == "1") then -- on
+		setLightDimming(22, "100") -- on to 100%
+	end
+end
+
+function officeSwitch() 
+ 	local status = luup.variable_get("urn:upnp-org:serviceId:SwitchPower1", "Status", 19) -- 1 = on, 0 = off
+ 	luup.log('Tonys Log: officeSwitch: ' .. status)
+	
+	if (status == "1") then -- on
+		setLightDimming(19, "100") -- on to 100%
+	end
+end
+
+function balconySwitch() 
+ 	local status = luup.variable_get("urn:upnp-org:serviceId:SwitchPower1", "Status", 59) -- 1 = on, 0 = off
+ 	luup.log('Tonys Log: balconySwitch: ' .. status)
+	
+	if (status == "1") then -- on
+		setLightDimming(59, "100") -- on to 100%
+	end
+end
 
 function sceneMasterButtonPress()
 	-- button is in the sl_CentralScene variable
@@ -166,10 +200,15 @@ end
 
 function setLightOn(device)
 	setLightPower(device, "1")
+	setLightDimming(device, "100")
 end
 
 function setLightOff(device)
+	setLightDimming(device, "100")
 	setLightPower(device, "0")
+	
+	
+	
 end
 
 function getLightPower(device)
