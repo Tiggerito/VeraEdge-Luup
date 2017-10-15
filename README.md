@@ -28,6 +28,8 @@ Expect logs not to be instant
 Can filter logs with grep ocmmands...
 tail -f LuaUPnP.log | grep "^04\|^08"
 
+tail -f LuaUPnP.log | grep "Tonys"
+
 tail -f LuaUPnP.log | grep "Device_Variable\|Tonys"
 
 This filters out a lot of the noise:

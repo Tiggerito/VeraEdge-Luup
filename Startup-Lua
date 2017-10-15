@@ -7,7 +7,9 @@ require("ConciergeServer")
 luup.variable_watch("sceneMasterButtonPress","urn:micasaverde-com:serviceId:SceneController1","sl_CentralScene",62)
 
 -- Watch my Vision ZT 1101BR-5 Keyfob
-luup.variable_watch("fobButtonPress","urn:micasaverde-com:serviceId:SceneController1","LastSceneID",72)
+ -- luup.variable_watch("fobButtonPressLastSceneID","urn:micasaverde-com:serviceId:SceneController1","LastSceneID",72)
+ luup.variable_watch("fobButtonPressLastSceneTime","urn:micasaverde-com:serviceId:SceneController1","LastSceneTime",72)
+ -- luup.variable_watch("fobButtonPresssl_SceneActivated","urn:micasaverde-com:serviceId:SceneController1","sl_SceneActivated",72)
 
 -- Watch my Fibaro The Button
 luup.variable_watch("theButtonPress","urn:micasaverde-com:serviceId:SceneController1","sl_CentralScene",73)
@@ -115,7 +117,7 @@ end
 
 
 
-function fobButtonPress()
+function fobButtonPressLastSceneTime ()
 	-- To connect the device press 1+4 till red led flashes. hols 1m from Vera and have Vera Add Device.
 	-- put in scene activation mode. Hold 1+3 till red light
 	
@@ -124,7 +126,9 @@ function fobButtonPress()
 	--  for the scene activation mode the button is in the LastSceneID
 	local buttonNumber = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "LastSceneID", 72)
 	
-	luup.log('Tonys Log: Fob Button ' .. buttonNumber)
+	luup.log('Tonys Log: Fob Button: LastSceneTime: LastSceneID: ' .. buttonNumber)
+
+	-- This event is slow, but it always fires and does not clash with button numbers
 	
 	-- Every second number is a long press
 	if (buttonNumber == "1") then -- Button 1
@@ -140,6 +144,31 @@ function fobButtonPress()
 		runScene("14") -- all lights off
 	elseif (buttonNumber == "8") then -- Long Button 4
 	end	
+end
+
+function fobButtonPressLastSceneID()
+	local LastSceneID = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "LastSceneID", 72)
+	luup.log('Tonys Log: Fob Button: LastSceneID: LastSceneID: ' .. LastSceneID)
+
+	-- Does not fire if the LastSceneID does not change
+end
+
+function fobButtonPresssl_SceneActivated()
+	local LastSceneID = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "LastSceneID", 72)
+	local sl_SceneActivated = luup.variable_get("urn:micasaverde-com:serviceId:SceneController1", "sl_SceneActivated", 72)
+	luup.log('Tonys Log: Fob Button: sl_SceneActivated: LastSceneID: ' .. LastSceneID)
+	luup.log('Tonys Log: Fob Button: sl_SceneActivated: sl_SceneActivated: ' .. sl_SceneActivated)
+
+	-- LastSceneID is not updated yet
+
+	-- Button 1 = 1
+	-- Long Button 1 = 2
+	-- Button 2 = 4
+	-- Long Button 2 = 0
+	-- Button 3 = 8
+	-- Long Button 3 = 1 -- Clashes with Button 1
+	-- Button 4 = 4  -- Clashes with Button 2
+	-- Long Button 4 = 3  
 end
 
 function theButtonPress()
