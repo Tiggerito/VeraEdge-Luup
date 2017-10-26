@@ -1,4 +1,4 @@
--- Vera->Apps->Develop apps->Edit Startup Lua
+-- Vera - Apps - Develop apps->Edit Startup Lua
 
 -- For Vera Concierge
 require("ConciergeServer")
@@ -55,16 +55,22 @@ function sceneMasterButtonPress()
 	
 	luup.log('Tonys Log: SceneMaster: originalButtonNumber ' .. originalButtonNumber .. ' buttonMode: ' .. buttonMode)
 	
-	local buttonNumber = (originalButtonNumber + 1) / 2
+	local buttonNumber = 0
 	
 	local buttonModeName = 'unknown pressed'
 	
 	if (buttonMode == "0") then
 		buttonModeName = 'short pressed'
+		buttonNumber = (originalButtonNumber + 1) / 2
 	elseif (buttonMode == "1") then 
-		buttonModeName = 'long pressed'
+		buttonModeName = 'long pressed 1'
+		buttonNumber = originalButtonNumber
+	elseif (buttonMode == "2") then 
+		buttonModeName = 'long pressed 2'
+		buttonNumber = originalButtonNumber
 	elseif (buttonMode == "3") then
 		buttonModeName = 'double pressed'
+		buttonNumber = originalButtonNumber / 2
 	end
 	
 	luup.log('Tonys Log: SceneMaster: ' .. buttonModeName .. ' button ' .. buttonNumber)
@@ -87,30 +93,41 @@ function sceneMasterButtonPress()
 		elseif (buttonNumber == 8) then
 			lightToggle(53) -- monitors
 		end	
-	elseif (buttonMode == "1") then -- long press
+	elseif (buttonMode == "1") then -- long press 1
 		if (buttonNumber == 1) then
-			runScene("14") -- all off
+			runScene("21") -- living room lights on
 		elseif (buttonNumber == 2) then
-			
+			setLightOn(22) -- dinning
 		elseif (buttonNumber == 3) then
+			setLightOn(19) -- office
 		elseif (buttonNumber == 4) then
+			setLightOn(59) -- balcony
 		elseif (buttonNumber == 5) then
-			runScene("11") -- to bed
+			setLightOn(17) -- bedroom
 		elseif (buttonNumber == 6) then
-			-- downstairs off
+			setLightOn(48) -- entrance
 		elseif (buttonNumber == 7) then
+			setLightOn(32) -- stairs
 		elseif (buttonNumber == 8) then
-			setLightOff(53) -- monitors off
+			setLightOn(53) -- monitors
 		end	
 	elseif (buttonMode == "3") then -- double press
 		if (buttonNumber == 1) then
+			runScene("14") -- all off
 		elseif (buttonNumber == 2) then
+			setLightOff(22) -- dinning
 		elseif (buttonNumber == 3) then
+			setLightOff(19) -- office
 		elseif (buttonNumber == 4) then
+			setLightOff(59) -- balcony
 		elseif (buttonNumber == 5) then
+			runScene("11") -- to bed
 		elseif (buttonNumber == 6) then
+			setLightOff(48) -- entrance
 		elseif (buttonNumber == 7) then
+			setLightOff(32) -- stairs
 		elseif (buttonNumber == 8) then
+			setLightOff(53) -- monitors
 		end	
 	end
 end
