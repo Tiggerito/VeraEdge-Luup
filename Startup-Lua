@@ -64,10 +64,10 @@ function sceneMasterButtonPress()
 		buttonNumber = (originalButtonNumber + 1) / 2
 	elseif (buttonMode == "1") then 
 		buttonModeName = 'long pressed 1'
-		buttonNumber = originalButtonNumber
+		buttonNumber = originalButtonNumber / 1 -- turn it into a number
 	elseif (buttonMode == "2") then 
 		buttonModeName = 'long pressed 2'
-		buttonNumber = originalButtonNumber
+		buttonNumber = originalButtonNumber / 1 -- turn it into a number
 	elseif (buttonMode == "3") then
 		buttonModeName = 'double pressed'
 		buttonNumber = originalButtonNumber / 2
@@ -251,10 +251,7 @@ end
 
 function setLightOff(device)
 	setLightDimming(device, "100")
-	setLightPower(device, "0")
-	
-	
-	
+	setLightPower(device, "0")	
 end
 
 function getLightPower(device)
